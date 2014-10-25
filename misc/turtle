@@ -1,0 +1,25 @@
+#! /bin/sh
+
+USER=turtlejs
+PID=/srv/www-sugarlabs/turtlejs/turtleblocksjs-server/server.pid
+EXEC=/srv/www-sugarlabs/turtlejs/turtleblocksjs-server/server.py
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start|restart|force-reload)
+        # Create various dirs
+        start-stop-daemon --start --quiet --background --pidfile $PID --chuid $USER --exec $EXEC
+        exit $?
+        ;;
+  stop)
+        start-stop-daemon --stop --quiet --oknodo --pidfile $PID
+        exit $?
+        ;;
+  *)
+        echo "Usage: /etc/init.d/turtle" \
+                        "{start|stop}"
+        exit 2
+        ;;
+esac
+
