@@ -16,10 +16,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
+import os
+
 
 class Settings:
 
     PORT = 3000
     ADDRESS = '127.0.0.1'
     API_KEY = 'AkrSsv5dyks6fce4'
-    PROJECTS = './projects'
+    PROJECTS = os.path.join(os.path.dirname(
+        os.path.realpath(__file__)), 'projects')
