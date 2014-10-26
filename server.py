@@ -42,12 +42,19 @@ def check(method):
         if not 'x-project-id' in handler.headers or \
                not isinstance(handler.headers['x-project-id'], str) or \
                not handler.headers['x-project-id'].find('/') < 0 or \
-               not os.path.exists(get_project_path(handler)):
+               check_if_missing(method, handler):
             handler.send_response(404, "not found")
             handler.end_headers()
             return None
         return method(handler, *args, **kwargs)
     return verify
+
+
+def check_if_missing(method, handler):
+    if method.__name__ == 'do_GET' and \
+           not os.path.exists(get_project_path(handler)):
+        return True
+    return False
 
 
 def get_project_path(handler):
