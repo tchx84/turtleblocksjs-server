@@ -82,6 +82,12 @@ def check_if_missing(method, handler):
     return False
 
 
+def check_projects_path():
+    """Create the project folders if its didn't exists"""
+    if not os.path.exists(Settings.PROJECTS):
+        os.mkdir(Settings.PROJECTS)
+
+
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self):
@@ -121,8 +127,9 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             file.write(content)
 
 if __name__ == '__main__':
+    check_projects_path()
     httpd = SocketServer.TCPServer((Settings.ADDRESS,
-                                   Settings.PORT),
+                                    Settings.PORT),
                                    ServerHandler)
     try:
         httpd.serve_forever()
