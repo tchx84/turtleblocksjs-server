@@ -23,6 +23,6 @@ class Settings:
 
     PORT = 3000
     ADDRESS = '127.0.0.1'
-    API_KEY = 'AkrSsv5dyks6fce4'
+    API_KEY = 'SERVER_API_KEY'
     PROJECTS = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), 'projects')
