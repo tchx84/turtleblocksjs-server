@@ -28,8 +28,8 @@ from settings import Settings
 def authorize(method):
     """ just a basic method for authorization """
     def verify(handler, *args, **kwargs):
-        if not 'x-api-key' in handler.headers or \
-               handler.headers['x-api-key'] != Settings.API_KEY:
+        if 'x-api-key' not in handler.headers or \
+                handler.headers['x-api-key'] != Settings.API_KEY:
             handler.send_response(401, "unauthorized")
             handler.end_headers()
             return None
